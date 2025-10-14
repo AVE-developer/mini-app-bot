@@ -1,0 +1,56 @@
+/* Telegram Mini App ranglariga moslash */
+body {
+    background-color: var(--tg-theme-bg-color, #f0f0f0);
+    color: var(--tg-theme-text-color, #000000);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    transition: background-color 0.3s;
+}
+
+#app {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--tg-theme-hint-color, #999);
+}
+
+.counter {
+    font-size: 3em;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+#tap-button {
+    background-color: var(--tg-theme-button-color, #5ac8fa);
+    color: var(--tg-theme-button-text-color, #ffffff);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.1s ease-out;
+}
+
+#tap-button:active {
+    transform: scale(0.95);
+}
+
+.info {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--tg-theme-hint-color, #999);
+}
+
+/* Telegram MainButton (asosiy tugma) dizaynini imitatsiya qilish uchun */
+.telegram-button {
+    background-color: var(--tg-theme-button-color, #5ac8fa);
+    color: var(--tg-theme-button-text-color, #ffffff);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    margin-top: 20px;
+}
