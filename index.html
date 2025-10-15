@@ -1,30 +1,315 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVECOIN Tap-to-Earn</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <title>AVECOIN Web App - Crypto Miner</title>
+    <!-- Tailwind CSS CDN load -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons for navigation -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Global Style and Font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        :root {
+            --bg-color: #0c1515; /* Deeper Emerald Dark */
+            --primary-green: #10b981; /* Emerald */
+            --accent-gold: #fbbf24; /* Amber/Gold */
+            --nav-bg: #1a2b2e; /* Navigation bar background */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: #e5e7eb;
+            user-select: none;
+            overflow-x: hidden;
+            padding-bottom: 5rem;
+            /* Creative Background Effect: Subtle noise/texture for depth */
+            background-image: radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.05) 0%, transparent 50%), 
+                              radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.03) 0%, transparent 60%);
+        }
+
+        /* Coin Wrapper for Visual Object (No Click) */
+        #avecoin-wrapper {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            /* Primary glow effect */
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); /* O'chirilgan, faqat oddiy yaltiroq */
+            position: relative;
+            /* Bosilmasligi uchun kursor o'zgarishi yo'q */
+            cursor: default; 
+        }
+
+        /* Image to mimic the uploaded AVECOIN design */
+        .coin-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            /* Senior-level CSS: Adding depth via subtle inner shadow and border */
+            border: 4px solid #facc15; 
+            /* Oddiy, 3D bo'lmagan soya */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+        }
+
+        /* Navigation Bar Styling */
+        #nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background-color: var(--nav-bg);
+            border-top: 1px solid #374151;
+            /* Glassmorphism/Neumorphism like shadow */
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-btn {
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Spring effect */
+            color: #9ca3af; 
+            padding: 0.5rem 0;
+        }
+
+        .nav-btn.active {
+            color: var(--primary-green);
+            transform: translateY(-8px); 
+            /* Active button small glow */
+            text-shadow: 0 0 5px var(--primary-green);
+        }
+
+        .nav-btn:not(.active):hover {
+             color: #d1d5db; /* Light hover effect */
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <h1>AVECOIN</h1>
-        <div class="counter">
-            <span id="coin-count">0</span> AVE
-        </div>
+
+    <div id="app" class="max-w-md mx-auto min-h-screen pt-8 px-4">
         
-        <button id="tap-button">
-            💰 Tegib Koin Yig'ish
-        </button>
+        <!-- Top Header Panel -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-black text-white mb-1 tracking-wider">AVECOIN</h1>
+            <p class="text-sm text-gray-400 font-light">Crypto Miner Control Panel</p>
+        </header>
 
-        <div class="info">
-            <p>Foydalanuvchi ID: <span id="user-id">Yuklanmoqda...</span></p>
-        </div>
+        <!-- Page Contents -->
+        <main id="content-container">
+            
+            <!-- 1. Home Section -->
+            <section id="home-section" class="page-section space-y-10 flex flex-col items-center">
+                
+                <div class="text-center space-y-1">
+                    <p class="text-lg font-bold text-white tracking-widest">Your Current Balance</p>
+                    <h2 class="text-5xl font-extrabold text-emerald-400">12,450 <span class="text-2xl text-gray-500">AVE</span></h2>
+                </div>
+                
+                <!-- AVECOIN Coin Object (Visual Only) -->
+                <div id="avecoin-wrapper">
+                    <!-- Placeholder image that looks like the uploaded AVECOIN logo -->
+                    <!-- Tanga endi bosilmaydigan, statik obyekt sifatida turadi -->
+                    <img src="https://placehold.co/280x280/10b981/fbbf24?text=AVE\nCOIN\nVisual+Object" 
+                         alt="AVECOIN Gold Coin Visual Object" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/280x280/0d1a1b/fbbf24?text=AVE';" 
+                         class="coin-image"/>
+                </div>
 
-        <button id="upgrade-button" class="telegram-button">Upgrade'lar</button>
+                <p class="text-center text-gray-400 max-w-xs text-sm">
+                    This is the AVECOIN visual object. It is not currently tappable or interactive.
+                </p>
+
+                <!-- Bot Status -->
+                <div class="w-full mt-6 p-4 rounded-xl bg-gray-800 border border-gray-700 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">Bot Status:</span>
+                        <span class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full shadow-lg">
+                            ACTIVE 🟢
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Tasks Section -->
+            <section id="tasks-section" class="page-section hidden p-4 rounded-xl bg-gray-800 border border-gray-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">Tasks & Missions</h2>
+                <ul class="space-y-4">
+                    <li class="p-4 bg-gray-700 rounded-lg flex justify-between items-center transition duration-200 hover:bg-gray-600">
+                        <div>
+                            <p class="font-semibold text-white">Follow AVE on Telegram</p>
+                            <p class="text-sm text-gray-400">+100 AVE Reward</p>
+                        </div>
+                        <button class="px-4 py-2 bg-blue-600 rounded-xl text-white font-semibold text-sm shadow-md hover:bg-blue-500">
+                            Complete
+                        </button>
+                    </li>
+                     <li class="p-4 bg-gray-700 rounded-lg flex justify-between items-center transition duration-200 hover:bg-gray-600">
+                        <div>
+                            <p class="font-semibold text-white">Share a post on X (Twitter)</p>
+                            <p class="text-sm text-gray-400">+250 AVE Reward</p>
+                        </div>
+                        <button class="px-4 py-2 bg-blue-600 rounded-xl text-white font-semibold text-sm shadow-md hover:bg-blue-500">
+                            Complete
+                        </button>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- 3. Game Section (NEW) -->
+            <section id="game-section" class="page-section hidden p-4 rounded-xl bg-gray-800 border border-gray-700 shadow-xl text-center">
+                <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">Minigames & Boosts</h2>
+                <p class="text-gray-400 mb-6">Play exciting mini-games to earn extra AVECOIN and temporary mining boosts!</p>
+                
+                <div class="p-6 bg-gray-700 rounded-xl space-y-3">
+                    <p class="text-xl font-bold text-yellow-400">⚡️ Current Boost: 2x Mining Rate</p>
+                    <p class="text-sm text-gray-400">Expires in: 02:45:12</p>
+                    <button class="w-full mt-4 px-4 py-3 bg-red-600 rounded-xl text-white font-bold text-lg shadow-lg hover:bg-red-500">
+                        Start Next Game
+                    </button>
+                </div>
+                
+                <p class="mt-4 text-xs text-gray-500">Coming Soon: PvP Mining Battles!</p>
+            </section>
+
+            <!-- 4. Rank Section -->
+            <section id="rank-section" class="page-section hidden p-4 rounded-xl bg-gray-800 border border-gray-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">Rank Leaderboard</h2>
+                <ol class="space-y-2">
+                    <li class="p-3 bg-gray-700 rounded-lg flex justify-between items-center font-bold text-yellow-400 border-l-4 border-yellow-400 shadow-md">
+                        <span class="flex items-center"><i data-lucide="crown" class="w-5 h-5 mr-2"></i> #1: ProMiner_77</span>
+                        <span>12.4M AVE</span>
+                    </li>
+                    <li class="p-3 bg-gray-700 rounded-lg flex justify-between items-center">
+                        <span>#2: CryptoKing</span>
+                        <span>8.1M AVE</span>
+                    </li>
+                    <li class="p-3 bg-gray-700 rounded-lg flex justify-between items-center bg-gray-700 border-l-4 border-primary-green font-semibold">
+                        <span>#153: You (Your Rank)</span>
+                        <span>12,450 AVE</span>
+                    </li>
+                </ol>
+            </section>
+            
+            <!-- 5. Account Section (Renamed from Balance) -->
+            <section id="account-section" class="page-section hidden p-4 rounded-xl bg-gray-800 border border-gray-700 shadow-xl text-center">
+                <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">Account & Wallet</h2>
+                
+                <div class="my-6 p-4 bg-gray-700 rounded-xl">
+                    <p class="text-gray-400">Total AVECOIN Balance:</p>
+                    <p class="text-6xl font-extrabold text-emerald-400 mt-2">12,450</p>
+                    <p class="text-sm text-gray-500 mt-1">~ $12.45 USD (Mock)</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button class="w-full px-4 py-3 bg-indigo-600 rounded-xl text-white font-bold text-lg shadow-lg hover:bg-indigo-500">
+                        Withdraw to Wallet
+                    </button>
+                    <button class="w-full px-4 py-3 border border-gray-600 rounded-xl text-gray-300 font-bold text-lg hover:bg-gray-700">
+                        Settings & Security
+                    </button>
+                </div>
+            </section>
+
+        </main>
+        
     </div>
 
-    <script src="main.js"></script>
+    <!-- Navigation Bar -->
+    <nav id="nav-bar" class="flex justify-around items-center h-20 shadow-2xl">
+        <!-- 1. Home -->
+        <button data-page="home" class="nav-btn active flex flex-col items-center text-xs p-2">
+            <i data-lucide="home" class="w-6 h-6"></i>
+            <span>Home</span>
+        </button>
+        <!-- 2. Tasks -->
+        <button data-page="tasks" class="nav-btn flex flex-col items-center text-xs p-2">
+            <i data-lucide="check-square" class="w-6 h-6"></i>
+            <span>Tasks</span>
+        </button>
+        <!-- 3. Game (NEW) -->
+        <button data-page="game" class="nav-btn flex flex-col items-center text-xs p-2">
+            <i data-lucide="dice-5" class="w-6 h-6"></i>
+            <span>Game</span>
+        </button>
+        <!-- 4. Rank -->
+        <button data-page="rank" class="nav-btn flex flex-col items-center text-xs p-2">
+            <i data-lucide="trophy" class="w-6 h-6"></i>
+            <span>Rank</span>
+        </button>
+        <!-- 5. Account (RENAMED) -->
+        <button data-page="account" class="nav-btn flex flex-col items-center text-xs p-2">
+            <i data-lucide="user" class="w-6 h-6"></i>
+            <span>Account</span>
+        </button>
+    </nav>
+
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- GLOBAL VARIABLES ---
+        const pageSections = document.querySelectorAll('.page-section');
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const avecoinWrapper = document.getElementById('avecoin-wrapper');
+
+        // --- FUNCTIONS ---
+
+        /**
+         * Navigation logic between pages
+         * @param {string} targetPage - The ID of the page to show (e.g., 'home', 'tasks')
+         */
+        function navigateTo(targetPage) {
+            // 1. Hide all content sections
+            pageSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // 2. Show the target section
+            const targetSection = document.getElementById(`${targetPage}-section`);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            // 3. Update navigation buttons state
+            navButtons.forEach(btn => {
+                if (btn.getAttribute('data-page') === targetPage) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        /**
+         * Handles the AVECOIN click interaction
+         * Qoidaga binoan, bu funksiya endi chaqirilmaydi.
+         */
+        function handleCoinClick() {
+            // No action, coin is a visual object only.
+            console.log("Coin is a static visual object.");
+        }
+
+        // --- EVENT LISTENERS ---
+
+        // Navigation button click handler
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const page = btn.getAttribute('data-page');
+                navigateTo(page);
+            });
+        });
+
+        // AVECOIN tap handler (O'chirildi)
+        // avecoinWrapper.addEventListener('click', handleCoinClick);
+
+        // Load "Home" section on application start
+        window.onload = () => {
+            navigateTo('home');
+        };
+
+    </script>
 </body>
 </html>
