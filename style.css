@@ -30,8 +30,8 @@ body {
 }
 
 .coin-image {
-  width: 150%;
-  height: 150%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #facc15;
@@ -65,4 +65,5 @@ body {
 .nav-btn:not(.active):hover {
   color: #d1d5db;
 }
+
 
