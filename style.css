@@ -1,69 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 :root {
-  --bg-color: #0c1515;
-  --primary-green: #10b981;
-  --accent-gold: #fbbf24;
-  --nav-bg: #1a2b2e;
+  --bg-color: #0c1515;
+  --primary-green: #10b981;
+  --accent-gold: #fbbf24;
+  --nav-bg: #1a2b2e;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-color);
-  color: #e5e7eb;
-  user-select: none;
-  overflow-x: hidden;
-  padding-bottom: 5rem;
-  background-image: radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.03) 0%, transparent 60%);
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: #e5e7eb;
+  user-select: none;
+  overflow-x: hidden;
+  padding-bottom: 5rem;
+  /* Tashqi yashil va sariq orqa fon effektlari qoldirildi */
+  background-image: radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.03) 0%, transparent 60%);
 }
 
 /* Coin Object */
 #avecoin-wrapper {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  box-shadow: 0 0 25px rgba(251, 191, 36, 0.4), 0 0 40px rgba(16, 185, 129, 0.3);
-  position: relative;
-  overflow: hidden;
-  background-color: #000;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  /* FAKAT SARIQ SOYA QISMI O'CHIRILDI: Endi faqat yashil soyani ushlab turadi (0 0 40px rgba(16, 185, 129, 0.3)) */
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
 }
 
 .coin-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #facc15;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  width: 150%;
+  height: 150%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: none; /* SARIQ ICHKI CHEGARA TO'LIQ O'CHIRILDI */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* Navigation Bar */
 #nav-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background-color: var(--nav-bg);
-  border-top: 1px solid #374151;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: var(--nav-bg);
+  border-top: 1px solid #374151;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .nav-btn {
-  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  color: #9ca3af;
-  padding: 0.5rem 0;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #9ca3af;
+  padding: 0.5rem 0;
 }
 
 .nav-btn.active {
-  color: var(--primary-green);
-  transform: translateY(-8px);
-  text-shadow: 0 0 5px var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-8px);
+  text-shadow: 0 0 5px var(--primary-green);
 }
 
 .nav-btn:not(.active):hover {
-  color: #d1d5db;
+  color: #d1d5db;
 }
 
 
