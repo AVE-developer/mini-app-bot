@@ -20,7 +20,7 @@ body {
 
 /* Coin Object */
 #avecoin-wrapper {
-  width: 280px;
+  width: 320px;
   height: 280px;
   border-radius: 50%;
   box-shadow: 0 0 25px rgba(251, 191, 36, 0.4), 0 0 40px rgba(16, 185, 129, 0.3);
@@ -65,4 +65,5 @@ body {
 .nav-btn:not(.active):hover {
   color: #d1d5db;
 }
+
 
